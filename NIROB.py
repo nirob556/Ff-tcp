@@ -235,7 +235,7 @@ def send_visit(uid):
                     f"[FFFFFF]Player Level : [00FF00]{api_data['level']}\n"
                     f"[FFFFFF]Player Region : [00FF00]{api_data['region']}\n"
                     f"[C][B][11EAFD]‎━━━━━━━━━━━━\n"
-                    f"[C][B][FFB300]Credits: [FFFFFF]NIROB X [00FF00]CODEX!!\n"
+                    f"[C][B][FFB300]Credits: [FFFFFF]SPEED X [00FF00]CODEX!!\n"
                     
                 )
             }
@@ -305,7 +305,7 @@ f"[FFFFFF]-------------------------------\n"
                     f"[FFFFFF]Release Version : [00FF00]{api_data['ReleaseVersion']}\n"
                     f"[FFFFFF]CS Rank Point : [00FF00]{api_data['CsRankPoint']}\n"
                     f"[C][B][11EAFD]‎━━━━━━━━━━━━\n"
-                    f"[C][B][FFB300]Credits: [FFFFFF]NIROB [00FF00]CODEX!!\n"
+                    f"[C][B][FFB300]Credits: [FFFFFF]SPEED X [00FF00]CODEX!!\n"
                 )
             }
     else:
@@ -330,20 +330,17 @@ def attack_profail(player_id):
 
 def send_likes(uid):
     # NOTE: You need to replace "Here is the api likes" with your actual API endpoint.
-    likes_api_response = requests.get(f"https://vip-like-api.vercel.app/like?server_name=bd&uid={uid}")
+    likes_api_response = requests.get(f"https://vip-like-api-modxv2.vercel.app/like?server_name=bd&uid={uid}")
     
     if likes_api_response.status_code == 200:
         api_data = likes_api_response.json()
         if api_data.get("LikesGivenByAPI", 0) == 0:
             return {
-                "status": "ok",
+                "status": "failed",
                 "message": (
-                    f"[C][B][00FF00]________________________\n"
-                    f" ✅ {format_text('Added')} {api_data['LikesGivenByAPI']} {format_text('Likes')}\n"
-                    f" {format_text('Name:')} {api_data['PlayerNickname']}\n"
-                    f" {format_text('Previous Likes:')} {api_data['LikesbeforeCommand']}\n"
-                    f" {format_text('New Likes:')} {api_data['LikesafterCommand']}\n"
-                    f" {format_text('©DEVELOPMENT: NIROB X CODX..!!')}\n"
+                    f"[C][B][FF0000]________________________\n"
+                    f" ❌ {format_text('Daily Limit For Sending Likes!')}\n"
+                    f" {format_text('Try Again After 24 Hours')}\n"
                     f"________________________"
                 )
             }
@@ -816,48 +813,28 @@ class FF_CLIENT(threading.Thread):
         fields = {
             1: 1,
             2: {
-                1: 12947146032,
-                2: Enc_Id,
-                3: 2,
-                4: str(Msg),
-                5: int(datetime.now().timestamp()),
-                7: 2,
-                9: {
-                    1: "RON PROTO", #RON PROTO DONT CHANGE 
-                    2: int(get_random_avatar()),
-                    3: 901049014,
-                    4: 330,
-                    5: 800000304,
-                    8: "Friend",
-                    10: 1,
-                    11: 1,
-                    13: {
-                        1: 2,
-                        2: 1,
-                    },
-                    14: {
-                        1: 11017917409,
-                        2: 8,
-                        3: "\u0010\u0015\b\n\u000b\u0013\f\u000f\u0011\u0004\u0007\u0002\u0003\r\u000e\u0012\u0001\u0005\u0006"
-                    }
-                },
-                10: "BD",
-                13: {
-                    1: "https://graph.facebook.com/v9.0/253082355523299/picture?width=160&height=160",
-                    2: 1,
-                    3: 1
-                },
-                14: {
-                    1: {
-                        1: random.choice([1, 4]),
-                        2: 1,
-                        3: random.randint(1, 180),
-                        4: 1,
-                        5: int(datetime.now().timestamp()),
-                        6: "BD"
-                    }
-                }
+            1: 3557944186,
+            2: Enc_Id,
+            3: 2,
+            4: str(Msg),
+            5: int(datetime.now().timestamp()),
+            9: {
+            
+            2: int(get_random_avatar()),
+            3: 901041021,
+            4: 330,
+            
+            10: 1,
+            11: 155
+            },
+            10: "en",
+            13: {
+            1: "https://graph.facebook.com/v9.0/104076471965380/picture?width=160&height=160",
+            2: 1,
+            3: 1
             }
+            },
+            14: ""
         }
 
         packet = create_protobuf_packet(fields)
@@ -1073,7 +1050,7 @@ class FF_CLIENT(threading.Thread):
                 json_result = get_available_room(hex_data[10:])
                 parsed_data = json.loads(json_result)
                 uid = parsed_data["5"]["data"]["1"]["data"]
-                clients.send(self.GenResponsMsg(format_text("Developer: NIROB X CODX.!!!] | Contact:!!01960835449"), uid))
+                clients.send(self.GenResponsMsg(format_text("Developer: SPEED X] | Contact: 01960835449"), uid))
             
             if "1200" in hex_data[:4] and b"/x" in data:
                 try:
@@ -1419,9 +1396,7 @@ class FF_CLIENT(threading.Thread):
                     f"[FFFFFF]{format_text('Show Developer Info:')}\n[4169E1]➥ /dev\n\n"
                     f"[FFFFFF]{format_text('Send Spam friend request:')}\n[00FF00]➥ /spam <id>\n\n"
                     f"[FFFFFF]{format_text('Get 1000 account visit:')}\n[00FF00]➥ /visit <id>\n\n"
-                    f"[FFFFFF]{format_text('Force Start by Team Code:')}\n[FFA500]➥ /go <team_code>\n\n"
-                   
-                    f"[FFFFFF]{format_text('©DEVELOPER :')}\n[FFA500]➥ NIROB X CODX..!!"
+                    f"[FFFFFF]{format_text('Force Start by Team Code:')}\n[FFA500]➥ /go <team_code>"
                 )
                 clients.send(self.GenResponsMsg(help_msg_1, uid))
                 time.sleep(0.5)
